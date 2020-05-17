@@ -278,6 +278,24 @@ func (sm *ArtifactoryServicesManager) GetReplication(repoKey string) ([]utils.Re
 	return getPushReplicationService.GetReplication(repoKey)
 }
 
+func (sm *ArtifactoryServicesManager) CreateMultipleReplication(params services.CreateMultipleReplicationParams) error {
+	replicationService := services.NewCreateMultipleReplicationService(sm.client)
+	replicationService.ArtDetails = sm.config.GetServiceDetails()
+	return replicationService.CreateMultipleReplication(params)
+}
+
+func (sm *ArtifactoryServicesManager) UpdateMultipleReplication(params services.UpdateMultipleReplicationParams) error {
+	replicationService := services.NewUpdateMultipleReplicationService(sm.client)
+	replicationService.ArtDetails = sm.config.GetServiceDetails()
+	return replicationService.UpdateMultipleReplication(params)
+}
+
+func (sm *ArtifactoryServicesManager) GetMultipleReplication(repoKey string) ([]utils.MultipleReplicationParams, error) {
+	getPushReplicationService := services.NewGetMultipleReplicationService(sm.client)
+	getPushReplicationService.ArtDetails = sm.config.GetServiceDetails()
+	return getPushReplicationService.GetMultipleReplication(repoKey)
+}
+
 func (sm *ArtifactoryServicesManager) GetVersion() (string, error) {
 	systemService := services.NewSystemService(sm.client)
 	systemService.ArtDetails = sm.config.GetServiceDetails()
