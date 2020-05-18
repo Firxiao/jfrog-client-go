@@ -13,34 +13,34 @@ import (
 	"github.com/jfrog/jfrog-client-go/utils/log"
 )
 
-type GetReplicationService struct {
+type GetMultipleReplicationService struct {
 	client     *rthttpclient.ArtifactoryHttpClient
 	ArtDetails auth.ServiceDetails
 }
 
-func NewGetReplicationService(client *rthttpclient.ArtifactoryHttpClient) *GetReplicationService {
-	return &GetReplicationService{client: client}
+func NewGetMultipleReplicationService(client *rthttpclient.ArtifactoryHttpClient) *GetMultipleReplicationService {
+	return &GetMultipleReplicationService{client: client}
 }
 
-func (drs *GetReplicationService) GetJfrogHttpClient() *rthttpclient.ArtifactoryHttpClient {
+func (drs *GetMultipleReplicationService) GetJfrogHttpClient() *rthttpclient.ArtifactoryHttpClient {
 	return drs.client
 }
 
-func (drs *GetReplicationService) GetReplication(repoKey string) ([]utils.ReplicationParams, error) {
+func (drs *GetMultipleReplicationService) GetMultipleReplication(repoKey string) ([]utils.MultipleReplicationParams, error) {
 	body, err := drs.preform(repoKey)
 	if err != nil {
 		return nil, err
 	}
-	var replicationConf []utils.ReplicationParams
-	if err := json.Unmarshal(body, &replicationConf); err != nil {
+	var multipleReplicationConf []utils.MultipleReplicationParams
+	if err := json.Unmarshal(body, &multipleReplicationConf); err != nil {
 		return nil, errorutils.CheckError(err)
 	}
-	return replicationConf, nil
+	return multipleReplicationConf, nil
 }
 
-func (drs *GetReplicationService) preform(repoKey string) ([]byte, error) {
+func (drs *GetMultipleReplicationService) preform(repoKey string) ([]byte, error) {
 	httpClientsDetails := drs.ArtDetails.CreateHttpClientDetails()
-	log.Info("Retrieve replication configuration...")
+	log.Info("Retrieve Multi-push replication configuration...")
 	resp, body, _, err := drs.client.SendGet(drs.ArtDetails.GetUrl()+"api/replications/"+repoKey, true, &httpClientsDetails)
 	if err != nil {
 		return nil, err
@@ -49,6 +49,6 @@ func (drs *GetReplicationService) preform(repoKey string) ([]byte, error) {
 		return nil, errorutils.CheckError(errors.New("Artifactory response: " + resp.Status + "\n" + clientutils.IndentJson(body)))
 	}
 	log.Debug("Artifactory response:", resp.Status)
-	log.Info("Done retrieve replication job.")
+	log.Info("Done retrieve Multi-push replication job.")
 	return body, nil
 }
