@@ -5,23 +5,23 @@ import (
 	"net/http"
 
 	"github.com/jfrog/jfrog-client-go/auth"
+	"github.com/jfrog/jfrog-client-go/http/jfroghttpclient"
 
-	rthttpclient "github.com/jfrog/jfrog-client-go/artifactory/httpclient"
 	clientutils "github.com/jfrog/jfrog-client-go/utils"
 	"github.com/jfrog/jfrog-client-go/utils/errorutils"
 	"github.com/jfrog/jfrog-client-go/utils/log"
 )
 
 type DeleteMultipleReplicationService struct {
-	client     *rthttpclient.ArtifactoryHttpClient
+	client     *jfroghttpclient.JfrogHttpClient
 	ArtDetails auth.ServiceDetails
 }
 
-func NewDeleteMultipleReplicationService(client *rthttpclient.ArtifactoryHttpClient) *DeleteMultipleReplicationService {
+func NewDeleteMultipleReplicationService(client *jfroghttpclient.JfrogHttpClient) *DeleteMultipleReplicationService {
 	return &DeleteMultipleReplicationService{client: client}
 }
 
-func (drs *DeleteMultipleReplicationService) GetJfrogHttpClient() *rthttpclient.ArtifactoryHttpClient {
+func (drs *DeleteMultipleReplicationService) GetJfrogHttpClient() *jfroghttpclient.JfrogHttpClient {
 	return drs.client
 }
 

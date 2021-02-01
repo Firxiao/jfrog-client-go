@@ -3,8 +3,6 @@ package artifactory
 import (
 	"io"
 
-	"github.com/jfrog/jfrog-client-go/utils/io/content"
-
 	"github.com/jfrog/jfrog-client-go/artifactory/buildinfo"
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
 	_go "github.com/jfrog/jfrog-client-go/artifactory/services/go"
