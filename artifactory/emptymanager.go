@@ -56,6 +56,10 @@ type ArtifactoryServicesManager interface {
 	UpdateReplication(params services.UpdateReplicationParams) error
 	DeleteReplication(repoKey string) error
 	GetReplication(repoKey string) ([]utils.ReplicationParams, error)
+	CreateMultipleReplication(params services.CreateMultipleReplicationParams) error
+	UpdateMultipleReplication(params services.UpdateMultipleReplicationParams) error
+	DeleteMultipleReplication(repoKey, repoUrl string) error
+	GetMultipleReplication(repoKey string) ([]utils.MultipleReplicationParams, error)
 	GetVersion() (string, error)
 	GetServiceId() (string, error)
 	PromoteDocker(params services.DockerPromoteParams) error
@@ -245,6 +249,22 @@ func (esm *EmptyArtifactoryServicesManager) DeleteReplication(repoKey string) er
 }
 
 func (esm *EmptyArtifactoryServicesManager) GetReplication(repoKey string) ([]utils.ReplicationParams, error) {
+	panic("Failed: Method is not implemented")
+}
+
+func (esm *EmptyArtifactoryServicesManager) CreateMultipleReplication(params services.CreateMultipleReplicationParams) error {
+	panic("Failed: Method is not implemented")
+}
+
+func (esm *EmptyArtifactoryServicesManager) UpdateMultipleReplication(params services.UpdateMultipleReplicationParams) error {
+	panic("Failed: Method is not implemented")
+}
+
+func (esm *EmptyArtifactoryServicesManager) DeleteMultipleReplication(repoKey, repoUrl string) error {
+	panic("Failed: Method is not implemented")
+}
+
+func (esm *EmptyArtifactoryServicesManager) GetMultipleReplication(repoKey string) ([]utils.MultipleReplicationParams, error) {
 	panic("Failed: Method is not implemented")
 }
 
